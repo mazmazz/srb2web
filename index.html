@@ -197,7 +197,7 @@
         width: 6.66em;
       }
 
-      #content {
+      #content, #redirect {
         width: 100%;
         height: 100%;
         overflow-y: auto;
@@ -305,9 +305,28 @@
       #androidNotice {
         display: none;
       }
+      
+      body:not(.lapsed) #content {
+        display: none;
+      }
+      
+      body:not(.lapsed) #redirect {
+        display: block;
+      }
+      
+      body.lapsed #content {
+        display: block;
+      }
+      
+      body.lapsed #redirect {
+        display: none;
+      }
     </style>
   </head>
   <body>
+    <div id="redirect">
+      <p><a href="https://srb2web.surge.sh">Redirecting...</a></p>
+    </div>
     <div id="content">
       <div id="status-cont" class="emscripten">
         <div id="header">
@@ -356,5 +375,8 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript">
+      setTimeout(function(){ document.body.classList.add('lapsed'); }, 5000);
+    </script>
   </body>
 </html>
